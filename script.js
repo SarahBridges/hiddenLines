@@ -8,7 +8,7 @@ var drawChart = function(d)
   var margins = {top:10,bottom:10,left:10,right:10}
 
   var xScale = d3.scaleLinear()
-                 .domain([0,d.length])
+                 .domain([0,function(d){return d.length;}])
                  .range([0,8])
 
   var yScale = d3.scaleLinear()
