@@ -13,8 +13,8 @@ var drawChart = function(d)
 
   var yScale = d3.scaleLinear()
                  .domain([0,d3.max(function(d){return d;})])
-                 .range([height,0])
-   svg = d3.select("svg")
+                 .range([screen.height,0]);
+   var svg = d3.select("svg")
            .selectAll("circle")
            .data(d)
            .enter()
