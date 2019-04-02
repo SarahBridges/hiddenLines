@@ -12,7 +12,7 @@ var drawChart = function(d)
                  .range([0,8])
 
   var yScale = d3.scaleLinear()
-                 .domain([0,d3.max(function(d){return d;}))
+                 .domain([0,d3.max(function(d){return d;})])
                  .range([height,0])
    svg = d3.select("svg")
            .selectAll("circle")
@@ -22,12 +22,12 @@ var drawChart = function(d)
            .attr("cy", function(d){return yScale(d);})
            .attr("cx", function(d,i){return xScale(i);})
            .attr("r", 2)
-    
+
     var line = d3.line()
                  .x(function(d,i){return xScale(i);})
                  .y(function(d){return yScale(d);})
                  .curve(d3.curve(CatmullRom))
-    
+
     var area = d3.area()
                  .x(function(d,i){return xScale(i);})
                  .y0(function(d){return yScale(height);})
