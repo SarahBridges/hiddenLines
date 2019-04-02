@@ -1,9 +1,10 @@
 var data = d3.json("pets.json")
 
-data.then(function(data){drawChart(data.kitttens);})
+data.then(function(data){drawChart(data.kittens);})
 
-var drawChart = function(d)
+var drawChart = function(data)
 {
+
   var screen = {height: 500, width: 500}
   var margins = {top:10,bottom:10,left:10,right:10}
 
@@ -16,7 +17,7 @@ var drawChart = function(d)
                  .range([screen.height,0]);
    var svg = d3.select("svg")
            .selectAll("circle")
-           .datum(d)
+           .datum(data)
            .enter()
            .append("circle")
            .attr("cy", function(d){return yScale(d);})
