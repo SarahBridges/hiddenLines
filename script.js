@@ -8,20 +8,23 @@ var drawChart = function(data)
   var screen = {height: 500, width: 500}
   var margins = {top:10,bottom:10,left:10,right:10}
 
+  var width = screen.width - margins.left - margins.right
+    var height = screen.height - margins.top - margins.bottom
+
  var svg = d3.select("svg")
                   .attr("height",screen.height)
                   .attr("width",screen.width);
-                    
+
   var xScale = d3.scaleLinear()
                  .domain([0,function(d){return d.length;}])
                  .range([0,8]);
 
   var yScale = d3.scaleLinear()
                  .domain([0,d3.max(function(d){return d;})])
-                 .range([screen.height,0]);
+                 .range([height,0]);
 
            svg.selectAll("circle")
-           .datum(data)
+           .data(data)
            .enter()
            .append("circle")
            .attr("cy", function(d){return yScale(d);})
