@@ -15,7 +15,10 @@ var drawChart = function(data)
                   .attr("height",screen.height)
                   .attr("width",screen.width)
                   .on("click", function(){
-
+                      var active = area.active ? false: true,
+                      newOpacity = active ? 0:1;
+                      d3.select(".area").style("opacity", newOpacity);
+                      area.active=active;
                   })
 
   var xScale = d3.scaleLinear()
@@ -35,21 +38,20 @@ var drawChart = function(data)
            .attr("r", 2);
 
            var area = d3.area()
-                        .x(function(d,i){return xScale(i);})
-                        .y0(function(d){return yScale(height);})
-                        .y1(function(d){return yScale(height-d);})
+                        .x(function(d,i){return xScale(i) + 30;})
+                        .y0(function(d){return yScale(d) + 5;})
+                        .y1(function(d,i){return yScale(0);})
                         //.curve(d3.curveCatmullRom);
 
                         svg.append("path")
-                         .data(data)
+                         .datum(data)
                          .attr("class", "area")
                          .attr("d", area)
-                         .attr("stroke-width", "2")
-                         .attr("fill", "blue")
+                         .classed("hidden", true)
 
     var line = d3.line()
                  .x(function(d,i){return xScale(i) + 30;})
-                 .y(function(d){return yScale(d)+ 5;});
+                 .y(function(d){return yScale(d)+ 5;})
                  //.curve(d3.curveCatmullRom)
 
                  svg.append("path")
@@ -57,7 +59,8 @@ var drawChart = function(data)
                  .attr("class", "line")
                  .attr("d", line)
                  .attr("fill", "none")
-                 .attr("stroke", "black");
+                 .attr("stroke", "black")
+
 
 
                  var yAxis = d3.axisLeft(yScale)
